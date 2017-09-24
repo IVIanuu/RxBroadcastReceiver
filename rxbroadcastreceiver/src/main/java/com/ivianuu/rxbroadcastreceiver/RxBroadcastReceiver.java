@@ -23,10 +23,12 @@ import android.content.IntentFilter;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
+import java.util.function.Consumer;
+
 import io.reactivex.Observable;
 
 /**
- * Entry point to create observables from broadcast receivers
+ * Static factory methods to create observables from broadcast receivers
  */
 public final class RxBroadcastReceiver {
 
@@ -35,7 +37,21 @@ public final class RxBroadcastReceiver {
     }
 
     /**
-     * Emits the received values from the receiver
+     * Emits the received intents of the receiver
+     */
+    @CheckResult @NonNull
+    public static Observable<Intent> create(@NonNull Context context,
+                                            @NonNull String... actions) {
+        IntentFilter intentFilter = new IntentFilter();
+        for (String action : actions) {
+            intentFilter.addAction(action);
+        }
+
+        return create(context, intentFilter);
+    }
+
+    /**
+     * Emits the received intents of the receiver
      */
     @CheckResult @NonNull
     public static Observable<Intent> create(@NonNull Context context,
@@ -43,7 +59,7 @@ public final class RxBroadcastReceiver {
         return Observable.create(e -> {
             BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
                 @Override
-                public void onReceive(Context context1, Intent intent) {
+                public void onReceive(Context __, Intent intent) {
                     if (!e.isDisposed()) {
                         e.onNext(intent);
                     }

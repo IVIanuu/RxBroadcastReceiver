@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         disposable = RxBroadcastReceiver.create(this, intentFilter)
                 .map(Intent::getAction)
-                .subscribe(s -> Log.d("testt", s));
+                .subscribe(s -> Log.d("screenstate", s));
     }
 
     @Override
