@@ -27,6 +27,8 @@ import java.util.function.Consumer;
 
 import io.reactivex.Observable;
 
+import static com.ivianuu.preconditions.Preconditions.checkNotNull;
+
 /**
  * Static factory methods to create observables from broadcast receivers
  */
@@ -42,6 +44,8 @@ public final class RxBroadcastReceiver {
     @CheckResult @NonNull
     public static Observable<Intent> create(@NonNull Context context,
                                             @NonNull String... actions) {
+        checkNotNull(context, "context == null");
+        checkNotNull(actions, "actions == null");
         IntentFilter intentFilter = new IntentFilter();
         for (String action : actions) {
             intentFilter.addAction(action);
@@ -56,6 +60,8 @@ public final class RxBroadcastReceiver {
     @CheckResult @NonNull
     public static Observable<Intent> create(@NonNull Context context,
                                             @NonNull IntentFilter intentFilter) {
+        checkNotNull(context, "context == null");
+        checkNotNull(intentFilter, "intentFilter == null");
         return Observable.create(e -> {
             BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
                 @Override
