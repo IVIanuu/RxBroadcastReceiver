@@ -23,11 +23,9 @@ import android.content.IntentFilter;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
-import java.util.function.Consumer;
-
 import io.reactivex.Observable;
 
-import static com.ivianuu.preconditions.Preconditions.checkNotNull;
+import static com.ivianuu.rxbroadcastreceiver.Preconditions.checkNotNull;
 
 /**
  * Static factory methods to create observables from broadcast receivers
