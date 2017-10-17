@@ -20,8 +20,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import io.reactivex.Observable;
 
@@ -41,15 +43,8 @@ public final class RxBroadcastReceiver {
      */
     @CheckResult @NonNull
     public static Observable<Intent> create(@NonNull Context context,
-                                            @NonNull String... actions) {
-        checkNotNull(context, "context == null");
-        checkNotNull(actions, "actions == null");
-        IntentFilter intentFilter = new IntentFilter();
-        for (String action : actions) {
-            intentFilter.addAction(action);
-        }
-
-        return create(context, intentFilter);
+                                            @NonNull IntentFilter intentFilter) {
+        return create(context, intentFilter, null);
     }
 
     /**
@@ -57,7 +52,19 @@ public final class RxBroadcastReceiver {
      */
     @CheckResult @NonNull
     public static Observable<Intent> create(@NonNull Context context,
-                                            @NonNull IntentFilter intentFilter) {
+                                            @NonNull IntentFilter intentFilter,
+                                            @Nullable String broadcastPermission) {
+        return create(context, intentFilter, broadcastPermission, null);
+    }
+
+    /**
+     * Emits the received intents of the receiver
+     */
+    @CheckResult @NonNull
+    public static Observable<Intent> create(@NonNull Context context,
+                                            @NonNull IntentFilter intentFilter,
+                                            @Nullable String broadcastPermission,
+                                            @Nullable Handler schedulerHandler) {
         checkNotNull(context, "context == null");
         checkNotNull(intentFilter, "intentFilter == null");
         return Observable.create(e -> {
@@ -72,7 +79,8 @@ public final class RxBroadcastReceiver {
 
             e.setCancellable(() -> context.unregisterReceiver(broadcastReceiver));
 
-            context.registerReceiver(broadcastReceiver, intentFilter);
+            context.registerReceiver(
+                    broadcastReceiver, intentFilter, broadcastPermission, schedulerHandler);
         });
     }
 }
