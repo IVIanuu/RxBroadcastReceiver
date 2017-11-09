@@ -71,9 +71,7 @@ public final class RxBroadcastReceiver {
             BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context __, Intent intent) {
-                    if (!e.isDisposed()) {
-                        e.onNext(intent);
-                    }
+                    e.onNext(intent);
                 }
             };
 
