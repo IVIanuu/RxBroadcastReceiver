@@ -17,13 +17,16 @@
 buildscript {
 
     ext {
-        androidPlugin = 'com.android.tools.build:gradle:3.0.0'
+        androidPlugin = 'com.android.tools.build:gradle:3.0.1'
         minSdkVersion = 14
-        compileSdkVersion = 26
-        targetSdkVersion = 26
-        buildToolsVersion = '26.0.2'
+        compileSdkVersion = 27
+        targetSdkVersion = 27
 
         mavenPlugin = 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+
+        kotlinVersion = '1.2.10'
+        kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 
         supportVersion = '26.1.0'
         supportAnnotations = "com.android.support:support-annotations:$supportVersion"
@@ -38,6 +41,7 @@ buildscript {
     }
     dependencies {
         classpath rootProject.ext.androidPlugin
+        classpath rootProject.ext.kotlinPlugin
         classpath rootProject.ext.mavenPlugin
     }
 }
@@ -46,7 +50,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'https://jitpack.io' }
     }
 }
 
