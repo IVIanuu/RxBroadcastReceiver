@@ -24,15 +24,15 @@ buildscript {
 
         mavenPlugin = 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
-        kotlinVersion = '1.2.10'
+        kotlinVersion = '1.2.21'
         kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 
-        supportVersion = '26.1.0'
+        supportVersion = '27.0.2'
         supportAnnotations = "com.android.support:support-annotations:$supportVersion"
         supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
 
-        rxJava = 'io.reactivex.rxjava2:rxjava:2.1.3'
+        rxJava = 'io.reactivex.rxjava2:rxjava:2.1.8'
     }
 
     repositories {
