@@ -22,7 +22,7 @@ buildscript {
         compileSdkVersion = 27
         targetSdkVersion = 27
 
-        mavenPlugin = 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        mavenPlugin = 'com.github.dcendents:android-maven-gradle-plugin:2.0'
 
         kotlinVersion = '1.2.21'
         kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
